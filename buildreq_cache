@@ -1,0 +1,8 @@
+4.2.0
+expat-dev
+glu-dev
+libjpeg-turbo-dev
+pkgconfig(gthread-2.0)
+pkgconfig(gtk+-3.0)
+python3-dev
+tiff-dev

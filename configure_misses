@@ -1,0 +1,34 @@
+Configure miss: LIBCURL
+Configure miss: LIBCURL
+Configure miss: SDL - version >= 1.2.0
+Configure miss: SDL - version >= 1.2.0
+Configure miss: _vsnwprintf
+Configure miss: _vsnwprintf
+Configure miss: broken libstdc++ visibility
+Configure miss: broken libstdc++ visibility
+Configure miss: cos
+Configure miss: cos
+Configure miss: floor
+Configure miss: floor
+Configure miss: if floating point functions link without -lm
+Configure miss: if floating point functions link without -lm
+Configure miss: if iconv needs const
+Configure miss: if iconv needs const
+Configure miss: if size_t is unsigned int
+Configure miss: if size_t is unsigned int
+Configure miss: if vsnprintf declaration is broken
+Configure miss: if vsnprintf declaration is broken
+Configure miss: if vsscanf() declaration is broken
+Configure miss: if vsscanf() declaration is broken
+Configure miss: jbg_dec_init in -ljbig
+Configure miss: jbg_dec_init in -ljbig
+Configure miss: putws
+Configure miss: putws
+Configure miss: sdl-config
+Configure miss: sdl-config
+Configure miss: whether we are using the Intel C compiler
+Configure miss: whether we are using the Intel C compiler
+Configure miss: whether we are using the Intel C++ compiler
+Configure miss: whether we are using the Intel C++ compiler
+Configure miss: whether we are using the Sun C++ compiler
+Configure miss: whether we are using the Sun C++ compiler
