@@ -1,8 +1,9 @@
 4.2.0
-expat-dev
+cmake
+freeglut-dev
 glu-dev
-libjpeg-turbo-dev
-pkgconfig(gthread-2.0)
+mesa-dev
 pkgconfig(gtk+-3.0)
-python3-dev
+pypi-requests
 tiff-dev
+wxGTK-dev
