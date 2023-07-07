@@ -7,7 +7,7 @@
 #
 Name     : pypi-wxPython
 Version  : 4.2.0
-Release  : 2
+Release  : 3
 URL      : https://files.pythonhosted.org/packages/d9/33/b616c7ed4742be6e0d111ca375b41379607dc7cc7ac7ff6aead7a5a0bf53/wxPython-4.2.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/d9/33/b616c7ed4742be6e0d111ca375b41379607dc7cc7ac7ff6aead7a5a0bf53/wxPython-4.2.0.tar.gz
 Source1  : https://files.pythonhosted.org/packages/d9/33/b616c7ed4742be6e0d111ca375b41379607dc7cc7ac7ff6aead7a5a0bf53/wxPython-4.2.0.tar.gz.asc
@@ -84,6 +84,10 @@ python components for the pypi-wxPython package.
 Summary: python3 components for the pypi-wxPython package.
 Group: Default
 Requires: python3-core
+Provides: pypi(wxpython)
+Requires: pypi(numpy)
+Requires: pypi(pillow)
+Requires: pypi(six)
 
 %description python3
 python3 components for the pypi-wxPython package.
@@ -101,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1684855741
+export SOURCE_DATE_EPOCH=1688748828
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -160,6 +164,10 @@ export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
 python3 -tt setup.py build install --root=%{buildroot}-v3
 popd
+## install_append content
+# Strip executable bit from shared libraries under the Python path so the embedded copy of wxWidgets doesn't produce conflicting RPM provides with the system wxWidgets installation
+find %{buildroot}*/usr/lib/python*/site-packages -type f -name 'libwx_*.so*' -exec chmod -v ugo-x {} +
+## install_append end
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files

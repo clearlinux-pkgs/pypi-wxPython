@@ -1,0 +1,2 @@
+# Strip executable bit from shared libraries under the Python path so the embedded copy of wxWidgets doesn't produce conflicting RPM provides with the system wxWidgets installation
+find %{buildroot}*/usr/lib/python*/site-packages -type f -name 'libwx_*.so*' -exec chmod -v ugo-x {} +
