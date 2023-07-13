@@ -1,5 +1,5 @@
 # Remove bins that are really just demos
-rm -f %{buildroot}%{_bindir}/*
+rm -rf %{buildroot}/usr/bin/*
 
 # Remove locale files (already provided by wxWidgets)
-rm -rf %{buildroot}%{python3_sitearch}/wx/locale
+rm -rf %{buildroot}/usr/lib/python*/site-packages/wx/locale

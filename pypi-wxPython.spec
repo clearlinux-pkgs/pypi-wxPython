@@ -5,7 +5,7 @@
 #
 Name     : pypi-wxPython
 Version  : 4.2.1
-Release  : 4
+Release  : 5
 URL      : https://files.pythonhosted.org/packages/aa/64/d749e767a8ce7bdc3d533334e03bb1106fc4e4803d16f931fada9007ee13/wxPython-4.2.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/aa/64/d749e767a8ce7bdc3d533334e03bb1106fc4e4803d16f931fada9007ee13/wxPython-4.2.1.tar.gz
 Summary  : Cross platform GUI toolkit for Python, "Phoenix" version
@@ -87,7 +87,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689277978
+export SOURCE_DATE_EPOCH=1689279754
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -100,7 +100,7 @@ DOXYGEN=/usr/bin/doxygen python3 -u build.py build_py --use_syswx --gtk3  %{?_sm
 
 
 %install
-export SOURCE_DATE_EPOCH=1689277978
+export SOURCE_DATE_EPOCH=1689279754
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-wxPython
 cp %{_builddir}/wxPython-%{version}/demo/data/SIL_OPEN_FONT_LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-wxPython/fa2b5c52bc6b71cbf75cf48e541569d83b22c0a3 || :
@@ -128,10 +128,10 @@ cp %{_builddir}/wxPython-%{version}/wx/lib/pubsub/LICENSE_BSD_Simple.txt %{build
 python build.py install_py --destdir=%{buildroot}
 ## install_append content
 # Remove bins that are really just demos
-rm -f %{buildroot}%{_bindir}/*
+rm -rf %{buildroot}/usr/bin/*
 
 # Remove locale files (already provided by wxWidgets)
-rm -rf %{buildroot}%{python3_sitearch}/wx/locale
+rm -rf %{buildroot}/usr/lib/python*/site-packages/wx/locale
 ## install_append end
 
 %files
