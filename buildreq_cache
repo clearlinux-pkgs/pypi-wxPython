@@ -1,9 +1,2 @@
-4.2.0
-cmake
-freeglut-dev
-glu-dev
-mesa-dev
+4.2.1
 pkgconfig(gtk+-3.0)
-pypi-requests
-tiff-dev
-wxGTK-dev

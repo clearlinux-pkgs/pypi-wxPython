@@ -4,4 +4,5 @@ doxygen-bin
 pypi(attrdict)
 python3-dev
 sip
+wxWidgets-bin
 wxWidgets-dev

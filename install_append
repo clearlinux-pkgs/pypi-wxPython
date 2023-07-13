@@ -1,2 +1,5 @@
-# Strip executable bit from shared libraries under the Python path so the embedded copy of wxWidgets doesn't produce conflicting RPM provides with the system wxWidgets installation
-find %{buildroot}*/usr/lib/python*/site-packages -type f -name 'libwx_*.so*' -exec chmod -v ugo-x {} +
+# Remove bins that are really just demos
+rm -f %{buildroot}%{_bindir}/*
+
+# Remove locale files (already provided by wxWidgets)
+rm -rf %{buildroot}%{python3_sitearch}/wx/locale

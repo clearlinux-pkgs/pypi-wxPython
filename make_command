@@ -1,1 +1,1 @@
-DOXYGEN=/usr/bin/doxygen python3 build.py dox touch etg --nodoc build_py --use_syswx --gtk3
+DOXYGEN=/usr/bin/doxygen python3 -u build.py build_py --use_syswx --gtk3
