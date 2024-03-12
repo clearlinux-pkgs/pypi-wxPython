@@ -1,0 +1,8 @@
+backport-0006-Bump-version-number.patch
+backport-0018-Fix-compatibility-with-Cython-3.0.0.patch
+backport-0019-Update-sip-to-v6.7.11.patch
+backport-0038-Fix-additional-SyntaxWarnings-with-Python-3.12.patch
+backport-0039-integer-division-for-randint.patch
+backport-0043-Update-sip-to-v6.8.2.patch
+backport-0044-Add-Python-3.12-to-classifiers.patch
+backport-0045-Update-sip-to-v6.8.3-and-fix-deprecations.patch

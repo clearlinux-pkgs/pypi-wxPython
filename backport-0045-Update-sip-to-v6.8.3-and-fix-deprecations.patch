@@ -1,0 +1,140 @@
+From 2c6307142f408bdc7ab9b0ba2951ba34412cb5d8 Mon Sep 17 00:00:00 2001
+From: Scott Talbert <swt@techie.net>
+Date: Mon, 12 Feb 2024 23:20:17 -0500
+Subject: [PATCH] Update sip to v6.8.3 and fix deprecations
+
+---
+ build.py                         | 2 +-
+ buildtools/config.py             | 2 +-
+ docs/sphinx/itemToModuleMap.json | 1 +
+ etg/defs.py                      | 2 +-
+ etg/graphics.py                  | 2 +-
+ etgtools/tweaker_tools.py        | 6 +++---
+ requirements/devel.txt           | 2 +-
+ sphinxtools/constants.py         | 2 +-
+ 8 files changed, 10 insertions(+), 9 deletions(-)
+
+diff --git a/build.py b/build.py
+index 9bf9944907db..49d2d98a38c5 100755
+--- a/build.py
++++ b/build.py
+@@ -1290,7 +1290,7 @@ def cmd_sip(options, args):
+             requires = ["sip >=6.6.2, <7"]
+             build-backend = "sipbuild.api"
+ 
+-            [tool.sip.metadata]
++            [project]
+             name = "{base}"
+ 
+             [tool.sip.bindings.{base}]
+diff --git a/buildtools/config.py b/buildtools/config.py
+index cf9f2ba1721f..34418dae3418 100644
+--- a/buildtools/config.py
++++ b/buildtools/config.py
+@@ -85,7 +85,7 @@ class Configuration(object):
+     PKGDIR = 'wx'
+     # The name of the top-level package
+ 
+-    SIP_ABI = '12.8'
++    SIP_ABI = '12.9'
+     SIP_TRACE = False
+ 
+     # ---------------------------------------------------------------
+diff --git a/docs/sphinx/itemToModuleMap.json b/docs/sphinx/itemToModuleMap.json
+index e428098f3c47..f6dafe9176d8 100644
+--- a/docs/sphinx/itemToModuleMap.json
++++ b/docs/sphinx/itemToModuleMap.json
+@@ -874,6 +874,7 @@
+ "DataViewBitmapRenderer":"wx.dataview.",
+ "DataViewCellMode":"wx.dataview.",
+ "DataViewCellRenderState":"wx.dataview.",
++"DataViewCheckIconText":"wx.dataview.",
+ "DataViewCheckIconTextRenderer":"wx.dataview.",
+ "DataViewChoiceRenderer":"wx.dataview.",
+ "DataViewColumn":"wx.dataview.",
+diff --git a/etg/defs.py b/etg/defs.py
+index 4445cf93c1a8..04c5e08eecad 100644
+--- a/etg/defs.py
++++ b/etg/defs.py
+@@ -75,7 +75,7 @@ def run():
+     module.insertItemAfter(td, etgtools.TypedefDef(type='wchar_t', name='wxChar'))
+     module.insertItemAfter(td, etgtools.TypedefDef(type='wxInt64', name='time_t'))
+     module.insertItemAfter(td, etgtools.TypedefDef(type='long long', name='wxFileOffset'))
+-    module.insertItemAfter(td, etgtools.TypedefDef(type='SIP_SSIZE_T', name='ssize_t'))
++    module.insertItemAfter(td, etgtools.TypedefDef(type='Py_ssize_t', name='ssize_t'))
+     module.insertItemAfter(td, etgtools.TypedefDef(type='unsigned char', name='byte', pyInt=True))
+     module.insertItemAfter(td, etgtools.TypedefDef(type='unsigned long', name='ulong'))
+ 
+diff --git a/etg/graphics.py b/etg/graphics.py
+index cd4efff6a9ab..30bf98ceca84 100644
+--- a/etg/graphics.py
++++ b/etg/graphics.py
+@@ -286,7 +286,7 @@ def run():
+ 
+     #---------------------------------------------
+     c = module.find('wxGraphicsGradientStops')
+-    c.addCppMethod('SIP_SSIZE_T', '__len__', '()', body="return (SIP_SSIZE_T)self->GetCount();")
++    c.addCppMethod('Py_ssize_t', '__len__', '()', body="return (Py_ssize_t)self->GetCount();")
+     c.addCppMethod('wxGraphicsGradientStop*', '__getitem__', '(ulong n)',
+                    pyArgsString='(n)',
+                    body="return new wxGraphicsGradientStop(self->Item(n));",
+diff --git a/etgtools/tweaker_tools.py b/etgtools/tweaker_tools.py
+index 5b76888e4af5..1b63c7179a25 100644
+--- a/etgtools/tweaker_tools.py
++++ b/etgtools/tweaker_tools.py
+@@ -958,7 +958,7 @@ class {ListClass}
+         {TypeDef}
+     %End
+ public:
+-    SIP_SSIZE_T __len__();
++    Py_ssize_t __len__();
+     %MethodCode
+         sipRes = sipCpp->size();
+     %End
+@@ -1129,7 +1129,7 @@ def wxArrayWrapperTemplate(ArrayClass, ItemClass, module, itemIsPtr=False, getIt
+ class {ArrayClass}
+ {{
+ public:
+-    SIP_SSIZE_T __len__();
++    Py_ssize_t __len__();
+     %MethodCode
+         sipRes = sipCpp->GetCount();
+     %End
+@@ -1183,7 +1183,7 @@ def wxArrayPtrWrapperTemplate(ArrayClass, ItemClass, module):
+ class {ArrayClass}
+ {{
+ public:
+-    SIP_SSIZE_T __len__();
++    Py_ssize_t __len__();
+     %MethodCode
+         sipRes = sipCpp->GetCount();
+     %End
+diff --git a/requirements/devel.txt b/requirements/devel.txt
+index ab0f39e15a06..44fa0244f936 100644
+--- a/requirements/devel.txt
++++ b/requirements/devel.txt
+@@ -3,7 +3,7 @@
+ appdirs
+ setuptools < 45 ; python_version < '3.0'
+ setuptools ; python_version >= '3.0'
+-sip == 6.8.2
++sip == 6.8.3
+ 
+ wheel
+ twine
+diff --git a/sphinxtools/constants.py b/sphinxtools/constants.py
+index 68bc847778ee..7ee45bfe1d65 100644
+--- a/sphinxtools/constants.py
++++ b/sphinxtools/constants.py
+@@ -223,7 +223,7 @@ class Enumeration(object):
+         return self.reverseLookup[value]
+ 
+ 
+-CONSTANT_RE = re.compile('^([\w\s,]+)=', re.M)
++CONSTANT_RE = re.compile(r'^([\w\s,]+)=', re.M)
+ 
+ EXCLUDED_ATTRS = ['__builtins__', '__doc__', '__name__', '__file__', '__path__',
+                   '__module__', '__all__', '__cached__', '__loader__', '__package__',
+-- 
+2.44.0
+

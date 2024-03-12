@@ -1,0 +1,25 @@
+From d17fff179525038638bc63026be134fae922372f Mon Sep 17 00:00:00 2001
+From: Scott Talbert <swt@techie.net>
+Date: Wed, 2 Aug 2023 08:54:22 -0400
+Subject: [PATCH] Update sip to v6.7.11
+
+---
+ requirements/devel.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/requirements/devel.txt b/requirements/devel.txt
+index 78af8ab8843c..cda34ed5e6be 100644
+--- a/requirements/devel.txt
++++ b/requirements/devel.txt
+@@ -3,7 +3,7 @@
+ appdirs
+ setuptools < 45 ; python_version < '3.0'
+ setuptools ; python_version >= '3.0'
+-sip == 6.7.9
++sip == 6.7.11
+ 
+ wheel
+ twine
+-- 
+2.44.0
+

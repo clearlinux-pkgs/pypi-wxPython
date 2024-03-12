@@ -1,0 +1,81 @@
+From 01787f43a5b3d996158179997046b1b7f67af15c Mon Sep 17 00:00:00 2001
+From: Scott Talbert <swt@techie.net>
+Date: Thu, 21 Dec 2023 20:19:57 -0500
+Subject: [PATCH] Fix additional SyntaxWarnings with Python 3.12
+
+It seems that Python 3.12 has started emitting additional SyntaxWarnings
+in cases where there are backslashes used in strings, so change these
+strings to raw strings to avoid the warnings.
+---
+ wx/lib/docview.py  | 2 +-
+ wx/lib/layoutf.py  | 4 ++--
+ wx/lib/wxpTag.py   | 2 +-
+ wx/tools/pywxrc.py | 4 ++--
+ 4 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/wx/lib/docview.py b/wx/lib/docview.py
+index 6d3e8d280b34..64446b2ffc5c 100644
+--- a/wx/lib/docview.py
++++ b/wx/lib/docview.py
+@@ -1023,7 +1023,7 @@ class DocTemplate(wx.Object):
+ 
+ 
+     def __init__(self, manager, description, filter, dir, ext, docTypeName, viewTypeName, docType, viewType, flags=DEFAULT_TEMPLATE_FLAGS, icon=None):
+-        """
++        r"""
+         Constructor. Create instances dynamically near the start of your
+         application after creating a wxDocManager instance, and before doing
+         any document or view operations.
+diff --git a/wx/lib/layoutf.py b/wx/lib/layoutf.py
+index 5cfaf0c3c356..56d294ed8aac 100644
+--- a/wx/lib/layoutf.py
++++ b/wx/lib/layoutf.py
+@@ -132,8 +132,8 @@ class Layoutf(wx.LayoutConstraints):
+              'r': 'wx.Right', 'h': 'wx.Height', 'w': 'wx.Width',
+              'x': 'wx.CentreX', 'y': 'wx.CentreY' }
+ 
+-    rexp1 = re.compile('^\s*([tlrbhwxy])\s*([!\?\*])\s*(\d*)\s*$')
+-    rexp2 = re.compile('^\s*([tlrbhwxy])\s*([=%<>^_])\s*([tlrbhwxy]?)\s*(\d*)\s*#(\d+)\s*$')
++    rexp1 = re.compile(r'^\s*([tlrbhwxy])\s*([!\?\*])\s*(\d*)\s*$')
++    rexp2 = re.compile(r'^\s*([tlrbhwxy])\s*([=%<>^_])\s*([tlrbhwxy]?)\s*(\d*)\s*#(\d+)\s*$')
+ 
+     def __init__(self,pstr=None,winlist=None):
+         wx.LayoutConstraints.__init__(self)
+diff --git a/wx/lib/wxpTag.py b/wx/lib/wxpTag.py
+index baf7240de9a2..1fb2db9af716 100644
+--- a/wx/lib/wxpTag.py
++++ b/wx/lib/wxpTag.py
+@@ -14,7 +14,7 @@
+ # o Updated for V2.5 compatibility
+ #
+ 
+-'''
++r'''
+ wx.lib.wxpTag
+ 
+ This module contains a wxHtmlTagHandler that knows how to build
+diff --git a/wx/tools/pywxrc.py b/wx/tools/pywxrc.py
+index 37818e403fdd..8596940d12ce 100644
+--- a/wx/tools/pywxrc.py
++++ b/wx/tools/pywxrc.py
+@@ -521,7 +521,7 @@ class XmlResourceCompiler:
+         # Generate subclasses
+         for subclass in subclasses:
+             windowClass = bases[subclass]
+-            subclass = re.sub("^\S+\.", "", subclass)
++            subclass = re.sub(r"^\S+\.", "", subclass)
+             windowClass = re.sub("^wx", "", windowClass)
+             outputList.append(self.templates.SUBCLASS_HEADER % locals())
+             outputList.append('\n')
+@@ -760,7 +760,7 @@ class XmlResourceCompiler:
+     #-------------------------------------------------------------------
+ 
+     def ConvertText(self, st):
+-        """
++        r"""
+         Encode special characters as escaped C/Python string characters.
+ 
+             \n => \\n
+-- 
+2.44.0
+

@@ -1,0 +1,24 @@
+From cdf786ac5b4f2ebd041c89f66556e4a6f51dc798 Mon Sep 17 00:00:00 2001
+From: Scott Talbert <swt@techie.net>
+Date: Mon, 29 Jan 2024 20:16:35 -0500
+Subject: [PATCH] Add Python 3.12 to classifiers
+
+---
+ setup.py | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/setup.py b/setup.py
+index 21da4820b8a0..1ea5b09d6421 100644
+--- a/setup.py
++++ b/setup.py
+@@ -90,6 +90,7 @@ Programming Language :: Python :: 3.8
+ Programming Language :: Python :: 3.9
+ Programming Language :: Python :: 3.10
+ Programming Language :: Python :: 3.11
++Programming Language :: Python :: 3.12
+ Programming Language :: Python :: Implementation :: CPython
+ Topic :: Software Development :: User Interfaces
+ """
+-- 
+2.44.0
+
