@@ -1,0 +1,24 @@
+From bf1c21fd6d3ffeeee89cef5b0db8288d91b79335 Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Tue, 2 Jul 2024 14:37:25 -0700
+Subject: [PATCH] Fix sip build failure on bool.cpp
+
+---
+ wscript | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/wscript b/wscript
+index 048a3df6ddf1..67515d729c93 100644
+--- a/wscript
++++ b/wscript
+@@ -570,7 +570,6 @@ def build(bld):
+         features = 'c cxx cshlib cxxshlib pyext',
+         target   = makeTargetName(bld, 'siplib'),
+         source   = ['sip/siplib/apiversions.c',
+-                    'sip/siplib/bool.cpp',
+                     'sip/siplib/descriptors.c',
+                     'sip/siplib/int_convertors.c',
+                     'sip/siplib/objmap.c',
+-- 
+2.45.2
+
