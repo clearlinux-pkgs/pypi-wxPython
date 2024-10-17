@@ -1,5 +1,5 @@
 PKG_NAME := pypi-wxPython
-URL = https://files.pythonhosted.org/packages/aa/64/d749e767a8ce7bdc3d533334e03bb1106fc4e4803d16f931fada9007ee13/wxPython-4.2.1.tar.gz
+URL = https://files.pythonhosted.org/packages/a4/f5/8c272764770f47fd419cc2eff4c4fa1c0681c71bcc2f3158b3a83d1339ff/wxPython-4.2.2.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
